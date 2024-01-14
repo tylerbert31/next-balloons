@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Carousel from "@/components/carousel/carousel";
-import Sections from "@/components/sections/sections";
-import FullPageLoader from "@/components/loader/fullpage";
-const Body = () => {
+import Carousel from "../carousel/carousel";
+import Sections from "../sections/sections";
+import FullPageLoader from "../loader/fullpage";
+const UpperSection = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -14,12 +14,8 @@ const Body = () => {
       });
   }, []);
 
-  // if (images?.length > 0) {
-  //   console.log(images);
-  // }
-
   return (
-    <div className=" flex-grow bg-gray-200">
+    <div className=" bg-gray-200">
       {images?.length > 0 ? (
         <Carousel images={images} />
       ) : (
@@ -38,4 +34,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default UpperSection;

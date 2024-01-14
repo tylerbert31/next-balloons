@@ -4,7 +4,7 @@ import SearchButton from "./search";
 export default function Header() {
   return (
     <>
-      <div className="navbar bg-base-100 text-slate-900">
+      <div className="navbar bg-white text-slate-900">
         <div className="navbar-start">
           <Drawer />
         </div>
@@ -19,7 +19,7 @@ export default function Header() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth="1.5"
+                strokeWidth="1.7"
                 stroke="currentColor"
                 className="w-5 h-5"
               >
