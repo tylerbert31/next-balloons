@@ -1,5 +1,5 @@
 const endpoints = {
-  local: "http://localhost:3000",
+  local: process.env.API_ENDPOINT,
 };
 
 const endpoint = endpoints.local;
