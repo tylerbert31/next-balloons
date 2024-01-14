@@ -8,10 +8,15 @@ import api_pass from "@/lib/api_pass";
 export async function getProducts(page, limit) {
   limit = limit || 20;
   page = page || 1;
-  const data = await fetch(
-    `${endpoint}/api/products?code=${api_pass}&limit=${limit}&page=${page}`
-  ).then((res) => res.json());
+  const response = await fetch(
+    `${endpoint}api/products?code=${api_pass}&limit=${limit}&page=${page}`
+  );
 
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
   return data.data;
 }
 
