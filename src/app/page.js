@@ -2,17 +2,33 @@ import BodyTemplate from "@/components/BodyTemplate/BodyTemplate";
 import Card from "@/components/card/card";
 import CardSkeletons from "@/components/card/cardSkeletons";
 import Paginator from "@/components/pagination/Paginator";
+import { endpoint } from "@/lib/endpoints";
+import api_pass from "@/lib/api_pass";
 
-export default function Home() {
+export async function getProducts(page, limit) {
+  limit = limit || 20;
+  page = page || 1;
+  const data = await fetch(
+    `${endpoint}/api/products?code=${api_pass}&limit=${limit}&page=${page}`
+  ).then((res) => res.json());
+
+  return data.data;
+}
+
+export default async function Home() {
+  const data = await getProducts();
+  const pages = data?.totalPages;
+  const currentPage = data?.page;
   return (
     <BodyTemplate>
       <div className="grid grid-cols-2 gap-4 my-2 mx-auto">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Card key={i} cardId={i} />
-        ))}
-        {Skeletons()}
+        {data &&
+          data?.items.map((product) => (
+            <Card key={product.id} product={product} />
+          ))}
+        {!data && Skeletons()}
       </div>
-      <Paginator pages={5} current={2} />
+      {pages > 0 && <Paginator pages={pages} current={currentPage} />}
     </BodyTemplate>
   );
 }

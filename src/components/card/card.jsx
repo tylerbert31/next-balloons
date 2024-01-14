@@ -1,37 +1,31 @@
 import React from "react";
+import Link from "next/link";
+import AddtoCart from "./addCartBtn";
 
-const Card = ({ cardId }) => {
+const Card = ({ cardId, product }) => {
   const discount = Math.floor(Math.random() * 35) + 1;
   const rating =
     Math.floor(Math.random() * 4) + 3 > 5
       ? 5
       : Math.floor(Math.random() * 4) + 3;
+
+  const image = `https://reding-balloons.pockethost.io/api/files/fymt38q4jnar1ec/${product.id}/${product.image}?thumb=155x0`;
   return (
-    <div key={cardId}>
+    <Link href={"/"} key={cardId}>
       <div className="relative max-w-[180px] max-h-[297px] flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white">
-        <a
-          className="relative mx-3 mt-3 flex h-40 md:h-60 overflow-hidden rounded-xl"
-          href="#"
-        >
-          <img
-            className="object-cover"
-            src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="product image"
-          />
-          <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-xs font-medium text-white">
-            {discount}% OFF
-          </span>
-        </a>
-        <div className="mt-2 md:mt-4 px-3 md:px-5 pb-3 md:pb-5">
-          <a href="#">
-            <h5 className="text-md md:text-md tracking-tight text-slate-900 truncate ">
-              Nike Air MX Super 2500 - Red
+        <div className="relative mx-3 mt-3 flex justify-center h-40 md:h-60 overflow-hidden rounded-xl">
+          <img className="object-contain" src={image} alt="product image" />
+        </div>
+        <div className="mt-2  px-3  pb-3 ">
+          <div>
+            <h5 className="text-md tracking-tight text-slate-900 truncate ">
+              {product.name}
             </h5>
-          </a>
-          <div className="mt-1 md:mt-2 mb-3 md:mb-5 flex items-center justify-between">
+          </div>
+          <div className="mt-1 mb-3 flex items-center justify-between">
             <p>
-              <span className="text-md md:text-xl font-bold text-slate-900">
-                $449
+              <span className="text-md font-bold text-slate-900">
+                ₱ {product.price}
               </span>
             </p>
             <div className="flex items-center justify-start">
@@ -39,7 +33,7 @@ const Card = ({ cardId }) => {
                 <svg
                   key={i}
                   aria-hidden="true"
-                  className="h-4 md:h-5 w-4 md:w-5 text-yellow-300"
+                  className="h-4  w-4 text-yellow-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -49,29 +43,10 @@ const Card = ({ cardId }) => {
               ))}
             </div>
           </div>
-          <a
-            href="#"
-            className="flex items-center justify-center rounded-md bg-slate-900 px-4 md:px-5 py-2.5 text-center text-sm md:text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-2 h-5 md:h-6 w-5 md:w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-            Add to cart
-          </a>
+          <AddtoCart product={product} />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

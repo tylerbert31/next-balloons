@@ -1,7 +1,13 @@
 "use client";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const SearchButton = () => {
+  if (typeof window !== "undefined") {
+    if (window.localStorage.getItem("sessionId") === null) {
+      window.localStorage.setItem("sessionId", uuidv4().substring(0, 8));
+    }
+  }
   return (
     <button
       className="btn btn-ghost btn-circle"

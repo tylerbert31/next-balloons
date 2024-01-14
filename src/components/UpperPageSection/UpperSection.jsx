@@ -19,7 +19,7 @@ const UpperSection = () => {
       {images?.length > 0 ? (
         <Carousel images={images} />
       ) : (
-        <div className="flex flex-col max-h-[107px]">
+        <div className="flex flex-row justify-around max-h-[107px]">
           <div className="skeleton w-32 h-32"></div>
           <div className="skeleton w-32 h-32"></div>
           <div className="skeleton w-32 h-32"></div>
