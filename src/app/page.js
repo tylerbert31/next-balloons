@@ -12,10 +12,6 @@ export async function getProducts(page, limit) {
     `${endpoint}api/products?code=${api_pass}&limit=${limit}&page=${page}`
   );
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
   const data = await response.json();
   return data.data;
 }
