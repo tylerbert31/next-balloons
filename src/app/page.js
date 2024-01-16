@@ -8,11 +8,16 @@ import api_pass from "@/lib/api_pass";
 export async function getProducts(page, limit) {
   limit = limit || 20;
   page = page || 1;
-  const response = await fetch(
-    `${endpoint}api/products?code=${api_pass}&limit=${limit}&page=${page}`
-  );
+  const data = await fetch(
+    `${endpoint}/api/products?code=${api_pass}&limit=${limit}&page=${page}`,
+    {
+      cache: "default",
+      headers: {
+        "cache-control": "max-age=60",
+      },
+    }
+  ).then((res) => res.json());
 
-  const data = await response.json();
   return data.data;
 }
 
@@ -23,11 +28,11 @@ export default async function Home() {
   return (
     <BodyTemplate>
       <div className="grid grid-cols-2 gap-4 my-2 mx-auto">
-        {data &&
-          data?.items.map((product) => (
+        {data.items &&
+          data.items.map((product) => (
             <Card key={product.id} product={product} />
           ))}
-        {!data && Skeletons()}
+        {!data.items && Skeletons()}
       </div>
       {pages > 0 && <Paginator pages={pages} current={currentPage} />}
     </BodyTemplate>
