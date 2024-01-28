@@ -4,8 +4,10 @@ import CardSkeletons from "@/components/card/cardSkeletons";
 import Paginator from "@/components/pagination/Paginator";
 import { endpoint } from "@/lib/endpoints";
 import api_pass from "@/lib/api_pass";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function getProducts(page, limit) {
+  noStore();
   limit = limit || 20;
   page = page || 1;
   const data = await fetch(
